@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body class="font-[Poppins] flex items-center justify-center h-screen px-10 bg-[url('images/bg.png')]">
+    <div class="h-fit w-[1260px]  flex items-center shadow-xl border border-black">
+        <img src="images/Coffee.jpg" alt="" class="w-2/4 h-[700px]">
+        <div class="shadow-lg bg-white p-10 flex flex-col rounded-lg w-2/4 h-[700px] relative">
+            <div class="flex self-end gap-3 items-center mb-10">
+                <p th:if="${title} == 'Register'"  class="text-[12px] text-gray-400">Already have an account?</p>
+                <p th:if="${title} == 'Login'" class="text-[12px] text-gray-400">Don't have an account?</p>
+                <a th:if="${title} == 'Login'" href="SignUp" class="font-bold border text-[12px] border-gray-400 rounded-xl px-2 py-1 text-gray-400">Sign Up</a>
+                <a th:if="${title} == 'Register'" href="Login" class="font-bold border text-[12px] border-gray-400 rounded-xl px-2 py-1 text-gray-400">Sign In</a>
+            </div>
+            <p class="font-bold text-black text-[22px]">Welcome to our Coffee shop!</p>
+            <p th:text="${title} +' your account'" class="text-[12px] text-gray-400">Login into your account</p>
+            <form th:if="${title} == 'Login'" action="/Login/authenticateL" method="post" class="relative flex flex-col gap-2 mt-10">
+                <label for="email" class="text-black font-medium text-[16px]">Email</label>
+                <input class="border border-black rounded-lg outline-blue-400 mb-3 py-2 px-5" type="email" id="email" name="email" required>
+                <label for="password" class="text-black font-medium text-[16px] ">Password</label>
+                <input class="border border-black rounded-lg outline-blue-400 mb-3 py-2 px-5" type="password" id="password" name="passwords" required>
+                <p th:if="${fail} != null" th:text="${fail}" class="text-red-50 px-5 py-2 rounded-lg bg-red-600 absolute bottom-2 font-bold">Login Failed</p>
+                <button type="submit" class="bg-blue-600 w-fit self-end rounded-md px-20 py-4 mt-10 text-white">Login</button>
+            </form>
+            <form th:if="${title} == 'Register'" action="./SignUp/register" method="post" class="relative flex flex-col gap-2 mt-10">
+                <label for="username" class="text-black font-medium text-[16px]">Username</label>
+                <input class="border border-black rounded-lg outline-blue-400 px-5 mb-3 py-2" type="text" id="username" name="username" required>
+                <label for="email" class="text-black font-medium text-[16px]">Email</label>
+                <input class="border border-black rounded-lg outline-blue-400 px-5 mb-3 py-2" type="email" id="email" name="email" required>
+                <label for="password" class="text-black font-medium text-[16px]">Password</label>
+                <input class="border border-black rounded-lg outline-blue-400 px-5 mb-3 py-2" type="password" id="password" name="passwords" required>
+                <input type="text" hidden value="user" name="role">
+                <p th:if="${fail} != null" th:text="${fail}" class="text-red-50 px-5 py-2 rounded-lg bg-red-600 absolute bottom-2 font-bold">Login Failed</p>
+                <button type="submit" class="bg-blue-600 w-fit self-end rounded-md px-20 py-4 mt-10 text-white">Sign Up</button>
+            </form>
+
+            <div class="flex items-center mt-10 justify-between absolute bottom-8 w-[550px]">
+                <div class="flex items-center gap-3 ">
+                    <p th:if="${title} == 'Login'" class="text-[16px] text-gray-400 font-medium">Create account with</p>
+                    <p th:if="${title} == 'Register'" class="text-[16px] text-gray-400 font-medium">Login with</p>
+                    <img class="w-[30px]" src="images/icons/facebook.svg" alt="">
+                    <img class="w-[30px]" src="images/icons/google.svg" alt="">
+                    <img class="w-[30px]" src="images/icons/twitter.svg" alt="">
+                </div>
+
+                <a href="/" class="text-gray-400 font-medium text-[14px]">Return</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

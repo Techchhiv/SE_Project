@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body class="font-[Poppins]">
+    <div class="flex max-xl:flex-col max-xl:gap-0 relative max-xl:items-center px-10 pt-10 pb-20 gap-5 justify-center ">
+        <div class="w-[865px] flex flex-col ">
+            <div class="font-bold text-[28px] flex justify-between  border-b border-gray-400">
+                <p>Items Cart</p>
+                <p th:text="${allitem} + ' Items'">3 Items</p>
+            </div>
+            <div class=" flex flex-col mt-[46px] gap-5 overflow-y-scroll no-scroll max-h-[520px]">
+                <div th:each="item,i : ${items}" class="px-[20px] items-center flex w-full h-[200px] flex-shrink-0 border border-black">
+                    <div class="min-w-[180px] min-h-[180px] max-h-[180px] max-w-[180px] flex justify-center items-center">
+                        <img class="max-w-[180px] max-h-[180px]" th:src="@{${'/images/' + #strings.toLowerCase(item.category) + '/' + item.image}}" alt="">
+                    </div>
+                    <div class=" pl-5 flex-col w-full justify-between h-full py-[27px] relative">
+                        <div class="flex justify-between w-full text-[20px]">
+                            <p th:text="${item.name}">Croissant</p>
+                            <div class="flex items-center">
+                                <p class="text-green-500">$</p>
+                                <p id="price" class="text-green-500" th:text="${item.price}">1.99</p>
+                            </div>
+                        </div>
+                        <p class="text-[14px] text-gray-400" th:text="${item.category}+' Items'">Food Items</p>
+                        <p class="text-[13px] mb-5 text-ellipsis line-clamp-2 my-2 h-[40px]" th:text="${item.description}">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore, laboriosam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam expedita dolor officia maiores velit, doloribus sit vero dolores minima suscipit.</p>
+                        <div class="flex justify-between w-full">
+                            <div class="flex justify-between w-[80px]">
+                                <button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M15 12H9" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                      </svg>
+                                </button>
+                                <p id="quantity" class="flex-grow text-center" th:text="${quantity[i.index]}">2</p>
+                                <button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <g clip-path="url(#clip0_5_58)">
+                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22.5C6.201 22.5 1.5 17.7975 1.5 12C1.5 6.2025 6.201 1.5 12 1.5C17.799 1.5 22.5 6.2025 22.5 12C22.5 17.7975 17.799 22.5 12 22.5ZM12 0C5.37225 0 0 5.37 0 12C0 18.63 5.37225 24 12 24C18.6278 24 24 18.63 24 12C24 5.37 18.6278 0 12 0ZM16.5 11.25H12.75V7.5C12.75 7.0875 12.4148 6.75 12 6.75C11.5852 6.75 11.25 7.0875 11.25 7.5V11.25H7.5C7.08525 11.25 6.75 11.5875 6.75 12C6.75 12.4125 7.08525 12.75 7.5 12.75H11.25V16.5C11.25 16.9125 11.5852 17.25 12 17.25C12.4148 17.25 12.75 16.9125 12.75 16.5V12.75H16.5C16.9147 12.75 17.25 12.4125 17.25 12C17.25 11.5875 16.9147 11.25 16.5 11.25Z" fill="black"/>
+                                        </g>
+                                        <defs>
+                                          <clipPath id="clip0_5_58">
+                                            <rect width="24" height="24" fill="white"/>
+                                          </clipPath>
+                                        </defs>
+                                      </svg>
+                                </button>
+                            </div>
+                            <p id="itemTotal">Total: $3.99</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <a href="/" class="max-xl:left-36 cursor-pointer w-fit absolute bottom-10 left-20 ease-in-out text-blue-400 hover:scale-110 transition hover:text-blue-600">Back to shopping</a>
+        
+        <div class="w-[453px] px-[43px] py-[40px] max-xl:mt-[30px] h-[540px] border border-black">
+            <p class="font-bold text-[28px] w-full border-b border-black pb-[15px] mb-[20px]">Order Summary</p>
+            <div class="text-[18px] mb-[16px] flex justify-between w-full">
+                <p th:text="'Items('+${allitem}+')'">Items(3):</p>
+                <p id="orderItem">$5.99</p>
+            </div>
+            <div class="text-[18px] mb-[20px]  flex justify-between w-full">
+                <p>Delivery Fee:</p>
+                <p class="pb-[20px] border-b border-b-gray-500">$0.99</p>
+            </div>
+            <div class="text-[18px] mb-[16px]   flex justify-between w-full">
+                <p>Total before tax:</p>
+                <p id="orderAfterDelivery" class="">$6.99</p>
+            </div>
+            <div class="text-[18px] mb-[20px]   flex justify-between w-full">
+                <p>Estimated (10%):</p>
+                <p id="orderTax" class="">$0.70</p>
+            </div>
+            <div class="text-[32px] mt-[35px] pt-[15px] border-t border-t-gray-500 text-[#FC2020] font-semibold mb-[20px] flex justify-between w-full">
+                <p>Total:</p>
+                <p id="orderTotal" class="">$7.69</p>
+            </div>
+
+            <button id="openModalBtn" class="flex w-full py-[25px] bg-[#4BAA5A] rounded-2xl text-white font-bold justify-center items-center text-[18px]">
+                Check Out
+            </button>
+        </div>
+        <div id="paymentModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Scan QR Code to Pay</h2>
+              <img th:src="@{/images/qr_code.png}" alt="Payment QR Code">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    .no-scroll::-webkit-scrollbar{
+        width: 0;
+    }
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1; 
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Enable scrolling if needed */
+        background-color: rgba(0, 0, 0, 0.6); /* Black background with transparency */
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* Center modal on screen */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    let quantity = document.querySelectorAll("#quantity");
+
+    let sum = 0;
+    let orderItem = document.querySelector("#orderItem");
+    let orderAfterDelivery = document.querySelector("#orderAfterDelivery");
+    let orderTax = document.querySelector("#orderTax");
+    let orderTotal = document.querySelector("#orderTotal");
+
+    quantity.forEach((q)=>{
+        let itemNumber = q.textContent;
+        let price = q.parentElement.parentElement.parentElement.querySelector("#price").textContent;
+        let display = q.parentElement.parentElement.querySelector("#itemTotal");
+
+        sum += eval(itemNumber + " * " +price);
+        display.textContent = "Total: $" + eval(itemNumber + " * " +price);
+    })
+
+    orderItem.textContent = '$'+sum;
+    let afterDelevery = eval(sum + " + 0.99");
+    orderAfterDelivery.textContent = '$' + parseFloat(afterDelevery).toFixed(2);
+    let afterTax = eval(afterDelevery + " * 1.10");
+    orderTax.textContent = '$' + parseFloat(afterTax).toFixed(2);
+    orderTotal.textContent = '$' + parseFloat(afterTax).toFixed(2);
+
+
+    const modal = document.getElementById("paymentModal");
+
+    const openModalBtn = document.getElementById("openModalBtn");
+
+    const closeBtn = document.getElementsByClassName("close")[0];
+    openModalBtn.onclick = function () {
+     modal.style.display = "block";
+    };
+
+    closeBtn.onclick = function () {
+     modal.style.display = "none";
+    };
+    
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            window.location.href = "/";
+        }
+    };
+</script>

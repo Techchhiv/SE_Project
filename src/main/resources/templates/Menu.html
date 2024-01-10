@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>HomePage</title>
+</head>
+<body class="font-[Poppins] bg-white h-full relative">
+    <nav class="bg-white w-full h-[112px] flex items-center justify-between px-4">
+        <a href="/">
+            <div class="flex items-center cursor-pointer">
+                <img class="w-[80px]" th:src="@{'/images/logo.png'}" alt="">
+                <p class="text-[26px]">Coffee Shop</p>
+            </div>
+        </a>
+        <ul class="flex justify-center items-center w-[310px] flex-grow  flex-shrink-0 gap-[4vh] text-[20px] font-semibold">
+            <li>
+                <a href="#" class="hover:text-gray-600 transition ease-in-out hover:scale-110">Home</a>
+            </li>
+            <li>
+                <a href="#" class="hover:text-gray-600 hover:scale-110">Menu</a>
+            </li>
+            <li>
+                <a href="#" class="hover:text-gray-600 hover:scale-110">Contact</a>
+            </li>
+            <li>
+                <a href="#" class="hover:text-gray-600 hover:scale-110">About</a>
+            </li>
+        </ul>
+        <div class="flex gap-[40px] items-center">
+            <svg class="max-lg:hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.7219 17.6916C14.1342 18.8667 19.0711 13.8183 17.6662 15.7374C17.7014 15.7346 17.6362 15.841 17.4178 16.1077C17.4178 16.1077 21.1697 19.8342 23.0114 21.7308C23.6508 22.4222 22.4972 23.8022 21.7134 23.0817C20.0456 21.4636 16.0992 17.4422 16.0931 17.4357L15.7219 17.6916Z" fill="#8B8484"/>
+                <path d="M10.2089 19.576C12.6229 19.5525 15.0126 18.5527 16.7311 16.8544C18.772 14.8374 19.8229 11.8533 19.4564 9.00424C18.8283 4.12221 14.8148 0.809082 10.1489 0.809082C6.60372 0.809082 3.15841 3.02674 1.64716 6.24236C0.490286 8.70424 0.487942 11.6766 1.64716 14.1427C3.14763 17.3358 6.53669 19.5417 10.0884 19.576C10.1287 19.576 10.169 19.576 10.2089 19.576ZM10.0983 18.0117C6.4931 17.9771 3.12935 15.1889 2.46044 11.6142C1.98888 9.09424 2.87904 6.36705 4.73341 4.57736C6.8981 2.48721 10.3008 1.78736 13.1301 2.97189C15.6614 4.03174 17.5561 6.49268 17.9053 9.20393C18.2043 11.528 17.3704 13.9636 15.7317 15.6413C14.294 17.1131 12.2779 17.9916 10.199 18.0117C10.1653 18.0117 10.132 18.0117 10.0983 18.0117Z" fill="#8B8484"/>
+            </svg>
+            <a href="./Checkout" class="flex items-center py-[10px] rounded-xl text-white justify-between w-[100px] flex-shrink-0 px-[15px] bg-red-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <path d="M7.87471 6.25H26.25L23.75 15H9.22089M25 20H10L7.5 3.75H3.75M11.25 25C11.25 25.6904 10.6904 26.25 10 26.25C9.30965 26.25 8.75 25.6904 8.75 25C8.75 24.3096 9.30965 23.75 10 23.75C10.6904 23.75 11.25 24.3096 11.25 25ZM25 25C25 25.6904 24.4404 26.25 23.75 26.25C23.0596 26.25 22.5 25.6904 22.5 25C22.5 24.3096 23.0596 23.75 23.75 23.75C24.4404 23.75 25 24.3096 25 25Z" stroke="#FFFCFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p class="font-semibold" th:text="${allitem}"></p>
+            </a>
+            <a th:if="${role} == 'user'" href="/Login" class="text-[20px] text-black font-bold ">Login</a>
+            <!-- <a th:if="${role} == 'admin'" th:text="${role}" class="text-[20px] text-black font-bold " href=""></a> -->
+            <div class="relative inline-block" th:if="${role} == 'admin'">
+                <button type="button" class="dtg flex items-center rounded-md bg-white px-3 py-2 text-[20px] font-bold text-gray-900 shadow-sm  hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                    Admin
+                    <svg class="w-[28px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                </button>
+                <div class="d transition ease-in-out absolute right-0 z-10 mt-2 w-fit origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div class="flex flex-col items-start" role="none">
+                        <a href="/Admin" class="py-2 px-5 rounded-t-lg hover:bg-blue-500 hover:text-white gap-2 items-center justify-center flex">
+                            <svg class="w-[14px] fill-blue-500 hover:fill-red-500" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g fill="none" fill-rule="evenodd" id="页面-1" stroke="none" stroke-width="1"> <g id="导航图标" transform="translate(-325.000000, -80.000000)"> <g id="编组" transform="translate(325.000000, 80.000000)"> <polygon fill="#FFFFFF" fill-opacity="0.01" fill-rule="nonzero" id="路径" points="24 0 0 0 0 24 24 24"></polygon> <polygon id="路径" points="22 7 12 2 2 7 2 17 12 22 22 17" stroke="#212121" stroke-linejoin="round" stroke-width="1.5"></polygon> <line id="路径" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="2" x2="12" y1="7" y2="12"></line> <line id="路径" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="12" x2="12" y1="22" y2="12"></line> <line id="路径" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="22" x2="12" y1="7" y2="12"></line> <line id="路径" stroke="#212121" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="17" x2="7" y1="4.5" y2="9.5"></line> </g> </g> </g> </g></svg>
+                            Products
+                        </a>
+                        <a href="/Logout" class="py-2 w-full pr-2 rounded-b-lg hover:fill-white hover:bg-blue-500 hover:text-white gap-2 items-center justify-center flex">
+                            <svg class="w-[14px] " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 20H6C4.89543 20 4 19.1046 4 18L4 6C4 4.89543 4.89543 4 6 4H14M10 12H21M21 12L18 15M21 12L18 9" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                            Log Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="relative inline-block" th:if="${role} == 'customer'">
+                <button type="button" class="dtg flex items-center rounded-md bg-white px-3 py-2 text-[20px] font-bold text-gray-900 shadow-sm  hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                    <p th:text="${username}"></p>
+                    <svg class="w-[28px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7 10L12 15L17 10" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                </button>
+                <div class="d transition ease-in-out absolute right-0 z-10 mt-2 w-fit origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div class="flex flex-col items-start w-fit" role="none">
+                        <a href="/Logout" class="py-2 w-[112px] pr-2 rounded-md hover:fill-white hover:bg-blue-500 hover:text-white gap-2 items-center justify-center flex">
+                            <svg class="w-[14px] " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 20H6C4.89543 20 4 19.1046 4 18L4 6C4 4.89543 4.89543 4 6 4H14M10 12H21M21 12L18 15M21 12L18 9" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                            Log Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="stuff flex flex-col  px-16 justify-center items-start gap-2 rounded-md flex-shrink-0 min-h-[640px] md:h-[450px] xl:h-[750px]">
+        <p class="font-bold line-clamp-2 text-ellipsis text-white text-[26px] w-[250px] xl:w-fit">Fresh Coffee In the Morning</p>
+        <p class="line-clamp-3 text-ellipsis w-[320px] text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, ab.</p>
+        <button type="submit" class=" text-white px-3 py-2 rounded-lg bg-orange-400">Order Now</button>
+    </div>
+
+
+    <div class="flex justify-between px-10 mt-[50px] items-center text-black">
+        <h2 class="font-bold text-[28px] ">Coffee List</h2>
+        <a href="#" class="font-medium text-[20px] text-[#A89696]">View all product</a>
+    </div>
+    <div class="w-full flex px-10 overflow-x-scroll no-scroll  gap-10 my-5">
+        <!-- <div th:each="p : ${pro}" th:if="${p.category} == 'drink'" class="rounded-sm shadow-md bg-white w-[160px] h-[210px] relative flex-shrink-0">
+            <img th:src="@{${'/images/' + p.image}}" alt="" class="w-full h-7/12">
+            <p class="ml-2 mt-1 text-[13px] font-bold" th:text="${p.name}"></p>
+            <p class="text-ellipsis w-full text-wrap px-2 line-clamp-2 text-[8px]" th:text="${p.description}"></p>
+            <div class="flex absolute right-0 bottom-0 justify-end pr-2">
+                <p class="text-green-600 font-bold" th:text="'$' + ${p.price}"></p>
+            </div>
+        </div> -->
+        <div th:each="p : ${pro}" th:if="${p.category} == 'Beverage'" class=" relative flex-shrink-0 w-[275px] h-[380px] bg-white rounded-sm shadow-lg">
+            <div class="flex justify-center">
+                <img th:src="@{${'/images/beverage/' + p.image +'?v=123456'}}" alt="" class="max-h-[190px]">
+            </div>
+            <p class="mt-5 text-[12px] text-[#7E7E7E] px-[20px]" th:text="'Beverage Items'"></p>
+            <!-- <a th:href="@{'/Itemdetails/'+${p.id}}">
+            </a> -->
+            <p class="mt-1 text-[14px] text-ellipsis line-clamp-1 font-bold px-[20px]" th:text="${p.name}">Coffee Latte With Cream</p>
+            <p class="mt-[13px] text-ellipsis w-full text-wrap line-clamp-3 text-[10px] px-[20px]" th:text="${p.description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, autem?</p>
+            <div class="flex absolute justify-between px-[20px] w-full bottom-5 right-0">
+                <p class="text-green-600 font-bold" th:text="'$' + ${p.price}"></p>
+                <a th:if="${role} != 'user'" th:href="@{'/Itemdetails/'+${p.id}}" class="bg-[#DEF9EC] text-[12px] shadow-sm px-3 py-1 font-semibold rounded-b-md text-[#3BB77E]">Add +</a>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-between px-10 mt-[82px] items-center text-black">
+        <h2 class="font-bold text-[28px] ">Food List</h2>
+        <a href="#" class="font-medium text-[20px] text-[#A89696]">View all product</a>
+    </div>
+    <div class="w-full flex px-10 overflow-x-scroll no-scroll  gap-10 my-5">
+        <!-- <div th:each="p : ${pro}" th:if="${p.category} == 'food'" class="rounded-sm shadow-md bg-white w-[160px] h-[210px] relative flex-shrink-0">
+            <img th:src="@{${'/images/' + p.image}}" alt="" class="w-full h-7/12">
+            <p class="ml-2 mt-1 text-[13px] font-bold" th:text="${p.name}"></p>
+            <p class="text-ellipsis w-full text-wrap px-2 line-clamp-2 text-[8px]" th:text="${p.description}"></p>
+            <div class="flex absolute right-0 bottom-0 justify-end pr-2">
+                <p class="text-green-600 font-bold " th:text="'$' + ${p.price}"></p>
+            </div>
+        </div> -->
+        <div th:each="p : ${pro}" th:if="${p.category} == 'Food'" class="relative flex-shrink-0 w-[275px] h-[380px] bg-white rounded-sm shadow-md">
+            <div class="flex justify-center">
+                <img th:src="@{${'/images/food/' + p.image +'?v=123456'}}" alt="" class="max-h-[190px]">
+            </div>
+            <p class="mt-5 text-[12px] text-[#7E7E7E] px-[20px]" th:text="${p.category} + ' Items'"></p>
+            <!-- <a th:href="@{'/Itemdetails/'+${p.id}}">
+            </a> -->
+            <p class="mt-1 text-[14px] text-ellipsis line-clamp-1 font-bold px-[20px]" th:text="${p.name}">Coffee Latte With Cream</p>
+            <p class="mt-[13px] text-ellipsis w-full text-wrap line-clamp-2 text-[10px] px-[20px]" th:text="${p.description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, autem?</p>
+            <div class="flex absolute justify-between px-[20px] w-full bottom-5 right-0">
+                <p class="text-green-600 font-bold" th:text="'$' + ${p.price}"></p>
+                <a th:if="${role} != 'user'" th:href="@{'/Itemdetails/'+${p.id}}" class="bg-[#DEF9EC] text-[12px] shadow-sm px-3 py-1 font-semibold rounded-b-md text-[#3BB77E]">Add +</a>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-between px-10 mt-[82px] items-center text-black">
+        <h2 class="font-bold text-[28px] ">Trending items</h2>
+        <a href="#" class="font-medium text-[20px] text-[#A89696]">View all product</a>
+    </div>
+    <div class="w-full flex px-10 overflow-x-scroll no-scroll  gap-10 my-5">
+        <!-- <div th:each="p : ${pro}" th:if="${p.category} == 'food'" class="rounded-sm shadow-md bg-white w-[160px] h-[210px] relative flex-shrink-0">
+            <img th:src="@{${'/images/' + p.image}}" alt="" class="w-full h-7/12">
+            <p class="ml-2 mt-1 text-[13px] font-bold" th:text="${p.name}"></p>
+            <p class="text-ellipsis w-full text-wrap px-2 line-clamp-2 text-[8px]" th:text="${p.description}"></p>
+            <div class="flex absolute right-0 bottom-0 justify-end pr-2">
+                <p class="text-green-600 font-bold " th:text="'$' + ${p.price}"></p>
+            </div>
+        </div> -->
+        <div th:each="p : ${pro}" th:if="${p.bestsellerflag}"  class="relative w-[275px] h-[380px] bg-white rounded-sm shadow-md flex-shrink-0">
+            
+            <div class="flex justify-center">
+                <img th:if="${p.category} == 'Food'" th:src="@{${'/images/food/' + p.image +'?v=123456'}}" alt="" class="max-h-[190px]">
+                <img th:if="${p.category} == 'Beverage'" th:src="@{${'/images/beverage/' + p.image +'?v=123456'}}" alt="" class="max-h-[190px]">
+            </div>
+            <p class="mt-5 text-[12px] text-[#7E7E7E] px-[20px]" th:text="${p.category} + ' Items'"></p>
+            <!-- <a th:href="@{'/Itemdetails/'+${p.id}}">
+            </a> -->
+            <p class="mt-1 text-[14px] text-ellipsis line-clamp-1 font-bold px-[20px]" th:text="${p.name}">Coffee Latte With Cream</p>
+            <p class="mt-[13px] text-ellipsis w-full text-wrap line-clamp-2 text-[10px] px-[20px]" th:text="${p.description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, autem?</p>
+            <div class=" flex absolute justify-between px-[20px] w-full bottom-5 right-0">
+                
+                <p class="text-green-600 font-bold" th:text="'$' + ${p.price}"></p>
+                <a th:if="${role} != 'user'" th:href="@{'/Itemdetails/'+${p.id}}" class="bg-[#DEF9EC] text-[12px] shadow-sm px-3 py-1 font-semibold rounded-b-md text-[#3BB77E]">Add +</a>
+            </div>
+        </div>
+</body>
+</html>
+
+<script>
+
+</script>
+
+<style>
+    .no-scroll::-webkit-scrollbar{
+        height: 0;
+    }
+    .stuff{
+        background: url('/images/bg1.jpg');
+        /* background: url('/src/main/resources/static/images/bg1.jpg');  */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .counter{
+        display: none;
+    }
+
+    .d{
+        display: none;
+    }
+
+    .active{
+        display: block;
+    }
+
+    
+</style>
+
+<script th:inline="javascript">
+    let toggle = document.querySelector('.dtg');
+    let content = document.querySelector('.d');
+
+
+    toggle.addEventListener("click",()=>{
+        content.classList.toggle("active");
+    });
+
+    window.addEventListener("click", (e) =>{
+        if(!e.target.matches(".d") && !e.target.matches(".dtg")) 
+            content.classList.remove("active");
+    })
+
+    
+    let counters = document.querySelectorAll(".counter");
+    let counts = document.querySelectorAll(".count");
+    let toggleAdd = document.querySelectorAll("#addBtn");
+
+    counters.forEach((counter,i)=>{
+        let increase = counter.querySelector(".increase");
+        let decrease = counter.querySelector(".decrease");
+
+        increase.addEventListener("click",()=>{
+            updateCounter(i,1);
+        });
+        decrease.addEventListener("click",()=>{
+            updateCounter(i,-1);
+        });
+
+        toggleAdd[i].addEventListener("click",()=>{
+            updateCounter(i,1);
+        });
+        
+    });
+
+    function updateCounter(i, value){
+        let count = parseInt(counts[i].textContent) + value;
+        if(count>=0){
+            counts[i].textContent = count;
+            if(count == 0){
+                counters[i].style.display="none";
+                toggleAdd[i].style.display="flex";
+            }else{
+                counters[i].style.display="flex";
+                toggleAdd[i].style.display="none";
+            }
+        }
+    }
+
+//    function sumbitData(){
+//         let productId = document.querySelectorAll("productId");
+
+//         let xhr = new XMLHttpRequest();
+
+//         console.log(productId);
+//         let url = '/'+productId[1].value;
+//         xhr.open('POST',url,true);
+//         xhr.setRequestHeader('Content-Type', 'application/json');
+
+//         xhr.onload = () =>{
+//             if (xhr.status >= 200 && xhr.status < 300) {
+//             // Handle successful response
+//             console.log('Data sent successfully:', xhr.responseText);
+//             // You can perform additional actions if needed
+//         } else {
+//             // Handle error
+//             console.error('Failed to send data:', xhr.statusText);
+                
+//             }
+//         }
+
+//         xhr.send();
+//    }
+</script>
